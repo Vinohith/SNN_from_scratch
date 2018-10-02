@@ -1,8 +1,9 @@
 import numpy as numpy
+from parameters import param as pa
 
 def receptive_field(img):
 	w = np.zeros([5,5])
-	pot = np.zeros([28,28])
+	pot = np.zeros([pa.pix, pa.pix])
 	ran = [-2,-1,0,1,2]
 	ox = 2
 	oy = 2
@@ -13,8 +14,8 @@ def receptive_field(img):
 			d = abs(ox-i) + abs(oy-j)
 			w[i][j] = (-0.375)*d + 1
 
-	for i in range(28):
-		for j in range(28):
+	for i in range(pa.pix):
+		for j in range(pa.pix):
 			summ = 0
 			for m in ran:
 				for n in ran:
