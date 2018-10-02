@@ -1,11 +1,14 @@
 class param:
-	T = 300
+	T = 200
+	t_back = -20
+	t_fore = 20
 
 	v_rest = 0
 	v_min = -200
 	
 	pix = 28
 	m = pix * pix
+	n = 3
 
 	w_max = 1.5
 	w_min = -1.2
@@ -14,3 +17,5 @@ class param:
 	tau_plus = 8
 	tau_minus = 5
 	sigma = 0.1
+
+	epoch = 10
