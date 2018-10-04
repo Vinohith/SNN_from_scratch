@@ -17,32 +17,35 @@ for i in range(pa.n):
 
 time = np.arange(1, pa.T+1, 1)
 
-
+#Creating the layer of Spiking neurons using the neuron class
 layer2 = []
-
 for i in range(pa.n):
 	a = neuron
 	layer2.append(a)
 
 
+#initializing the synapse values between the two layers
 synapse = np.zeros((pa.n, pa.m))
-
 for i in range(pa.n):
 	for j in range(pa.m):
 		synapse[i][j] = random.uniform(0, 0.4)
 
 
+#start of the learning process
 for k in range(pa.epoch):
 
 	# print()
 	# read the image (img)
+	#converting image into corresponding potential
 	pot = rf(img)
+	#encoding the potential as a spike train
 	train = np.array(encode(pot))
+	#calculating the threshold
 	thresh = threshold(train)
-
+	#leakage value of the simplified LIF neuron
 	var_D = 0.15
-
-	for x in layer2:
+	#initializing the neurons with the threshold values
+	for x in layer2:	
 		x.initial(thresh)
 
 
@@ -58,12 +61,14 @@ for k in range(pa.epoch):
 		for j, x in enumerate(layer2):
 			active = []
 			if (x.rest_time < t):
+				#simplified LIF equation
 				x.v = x.v + np.dot(synapse[j], train[:, t])
 				if (x.v > pa.v_rest):
 					x.v -= var_D
 				active_pot[j] = x.v 
 			pot_arrays[j].append(x.v)
 
+		#inhibition
 		if(f_spike == 0):
 			high_pot = max(active_pot)
 			if (high_pot > thresh):
@@ -75,17 +80,20 @@ for k in range(pa.epoch):
 					if (s != winner):
 						layer2[s].v = pa.v_min
 
+		#STDP learning rule
 		for j, x in enumerate(layer2):
 			s = x.check()
+			#executed only if the post-synaptic neuron spikes
 			if (s == 1):
 				x.rest_time = t + x.refractory_time
 				x.v = pa.v_rest
 				for h in range(pa.m):
+					#if the pre-spike is at most 20 time divisions before post spike, the synapse is strengthened
 					for t1 in range(-2, pa.t_back-1, -1):
 						if (0 <= t+t1 < pa.T+1):
 							if (train[h][t+t1] == 1):
 								synapse[j][h] = update(synapse[j][h], stdp(t1))
-
+					#if the pre-spike is after the post-spike, the synapse is weakened
 					for t1 in range(2, pa.t_fore+1, 1):
 						if (0 <= t+t1 < pa.T+1):
 							if (train[h][t+t1] == 1):
