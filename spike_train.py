@@ -18,3 +18,11 @@ def encode(pot):
 			train.append(temp)
 
 	return train
+
+
+# if __name__ == '__main__':
+# 	pot = np.random.rand(28, 28)
+# 	print(pot)
+# 	train = encode(pot)
+# 	print(np.shape(train))
+# 	print(train)

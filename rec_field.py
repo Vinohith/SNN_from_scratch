@@ -1,4 +1,4 @@
-import numpy as numpy
+import numpy as np
 from parameters import param as pa
 
 def receptive_field(img):
@@ -24,3 +24,9 @@ def receptive_field(img):
 			pot[i][j] = summ
 
 	return pot
+
+
+# if __name__ == '__main__':
+# 	img = np.random.rand(28, 28)
+# 	pot = receptive_field(img)
+# 	print(np.shape(pot))
