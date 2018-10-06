@@ -30,3 +30,7 @@ def receptive_field(img):
 # 	img = np.random.rand(28, 28)
 # 	pot = receptive_field(img)
 # 	print(np.shape(pot))
+# 	print(np.where(pot<0))
+# 	print(np.min(pot))
+# 	print(np.max(pot))
+# 	print(pot)
