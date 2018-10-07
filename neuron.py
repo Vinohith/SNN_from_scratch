@@ -9,7 +9,7 @@ from parameters import param as pa
 # v_min = -1
 # time = np.arange(0, 350) #simulation time
 
-class neuron:
+class neuron():
 
 	def __init__(self):
 		self.refractory_time = 5
