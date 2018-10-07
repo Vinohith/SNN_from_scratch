@@ -6,8 +6,12 @@ def threshold(train):
 	tu = np.shape(train)[0]
 	thresh = 0
 	for i in range(tu):
-		simul_active = sum(train[:, i])
+		simul_active = sum(train[i, :])
 		if simul_active > thresh:
 			thresh = simul_active
 
 	return (thresh / 3)
+
+# x = np.random.rand(784, 200)
+# thresh = threshold(x)
+# print(thresh)
