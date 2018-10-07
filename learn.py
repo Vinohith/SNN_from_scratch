@@ -1,4 +1,4 @@
-import numpy as numpy
+import numpy as np 
 from neuron import neuron
 import random
 from rec_field import receptive_field as rf 
@@ -8,8 +8,10 @@ from thresh import threshold
 from parameters import param as pa 
 import matplotlib.pyplot as plt
 import os
+from get_data import get_labeled_data
 
 
+training = get_labeled_data('train_data')
 
 pot_arrays = []
 for i in range(pa.n):
@@ -20,7 +22,7 @@ time = np.arange(1, pa.T+1, 1)
 #Creating the layer of Spiking neurons using the neuron class
 layer2 = []
 for i in range(pa.n):
-	a = neuron
+	a = neuron()
 	layer2.append(a)
 
 
@@ -32,10 +34,11 @@ for i in range(pa.n):
 
 
 #start of the learning process
-for k in range(pa.epoch):
+for k in range(pa.epoch):	
 
 	# print()
 	# read the image (img)
+	img = training['x'][99]
 	#converting image into corresponding potential
 	pot = rf(img)
 	#encoding the potential as a spike train
@@ -101,7 +104,7 @@ for k in range(pa.epoch):
 
 
 	if(img_win != 100):
-		for p in rnage(pa.m):
+		for p in range(pa.m):
 			if sum(train[p]) == 0:
 				synapse[img_win][p] -= 0.06
 				if(synapse[img_win][p] < pa.w_min):
@@ -111,6 +114,6 @@ for k in range(pa.epoch):
 ttt = np.arange(0, len(pot_arrays[0]), 1)
 v_th = []
 for i in range(len(ttt)):
-	v_th.append(layer2[0].v_th)
+	v_th.append(layer2[0].v_threshold)
 
 
