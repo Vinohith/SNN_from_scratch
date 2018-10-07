@@ -13,11 +13,9 @@ def encode(pot):
 			temp = np.zeros([(pa.T+1), ])
 			if pot[l][m] > 0:
 				freq = 5 * (R / pot[l][m])
-				print(freq)
 				k = freq
 			elif pot[l][m] <= 0:
 				k = 99999  #some very high value
-				print(k)
 			while k < pa.T:
 				temp[int(k)] = 1
 				k = k +freq
@@ -26,13 +24,13 @@ def encode(pot):
 	return train
 
 
-if __name__ == '__main__':
-	pot = np.random.randn(28, 28)
-	#print(pot)
-	print(np.max(pot))
-	print(np.min(pot))
-	train = encode(pot)
-	print(np.shape(train))
-	ind = np.where(pot == np.max(pot))
-	print(ind)
-	#print(train)
+# if __name__ == '__main__':
+# 	pot = np.random.randn(28, 28)
+# 	#print(pot)
+# 	print(np.max(pot))
+# 	print(np.min(pot))
+# 	train = encode(pot)
+# 	print(np.shape(train))
+# 	ind = np.where(pot == np.max(pot))
+# 	print(ind)
+# 	#print(train)
