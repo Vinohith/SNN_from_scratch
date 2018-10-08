@@ -34,11 +34,12 @@ for i in range(pa.n):
 
 
 #start of the learning process
-for k in range(pa.epoch):	
+for k in range(1):	
 
 	# print()
 	# read the image (img)
-	img = training['x'][99]
+	print(training['y'][k])
+	img = training['x'][k]
 	#converting image into corresponding potential
 	pot = rf(img)
 	#encoding the potential as a spike train
@@ -111,9 +112,15 @@ for k in range(pa.epoch):
 					synapse[img_win][p] = pa.w_min
 
 
-ttt = np.arange(0, len(pot_arrays[0]), 1)
-v_th = []
-for i in range(len(ttt)):
-	v_th.append(layer2[0].v_threshold)
+# ttt = np.arange(0, len(pot_arrays[0]), 1)
+# v_threshold = []
+# for i in range(len(ttt)):
+# 	v_threshold.append(layer2[0].v_threshold)
 
 
+# for i in range(pa.n):
+# 	axes = plt.gca()
+# 	axes.set_ylim([-20,50])
+# 	plt.plot(ttt,v_threshold, 'r' )
+# 	plt.plot(ttt,pot_arrays[i])
+# 	plt.show()
