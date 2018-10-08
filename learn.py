@@ -34,7 +34,7 @@ for i in range(pa.n):
 
 
 #start of the learning process
-for k in range(1):	
+for k in range(pa.epoch):	
 
 	# print()
 	# read the image (img)
