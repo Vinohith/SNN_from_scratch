@@ -8,7 +8,7 @@ class param:
 	
 	pix = 28
 	m = pix * pix
-	n = 3
+	n = 14
 
 	w_max = 1.5
 	w_min = -1.2
